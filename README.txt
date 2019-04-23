@@ -18,7 +18,7 @@ Chapter 2 - Procedure
 Hier wordt uitgelegd welke stappen je moet doorlopen om de MITM proxy in productie te nemen.
 
 Deze git repository moet gecloned worden naar een locale plek. Omdat dit een private github repo is, zal je hiervoor moet authenticeren. Om de git repo te clonen gebruik je het commando:
-#git clone https://github.com/nokje/mitmproxy
+#git copy https://github.com/nokje/mitmproxy
 
 Chapter 3 - Certiciaat installeren
 Met IOS 12.0.x is het niet meer mogelijk om via je browser certificaten te installeren. Dit kan uitsluitend met de mail app of de mappen (iCloud drive). Er zijn wel andere methoden welke te vinden zijn op openstack et cetera. In deze instructie maak ik gebruik van de mail app.

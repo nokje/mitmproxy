@@ -5,15 +5,17 @@ con=$dt' [mitm.sh] :'
 
 #functionlist
 ctrl_c() {
-	echo "$con ctrl +c pressed. Quiting mitm script."
+        echo ""
+	echo "$con ctrl +c pressed"
 	exit 1
 }
 trap ctrl_c INT
 
 #banner
 clear
-echo "$con Starting mitm"
+echo "$con Starting mitm" read_time
 sleep 1
+echo ""
 echo "+----------------------------------------------------+"
 printf "| %-50s |\n" "$ban"
 printf "| %-50s |\n" "Dit script start een mitm proxy. Het script"
@@ -25,16 +27,13 @@ printf "| %-50s |\n" "-hostapd"
 printf "| %-50s |\n" "-dnsmasq"
 printf "| %-50s |\n" "-mitmproxy"
 echo "+----------------------------------------------------+"
+echo ""
 sleep 1
 
 #recognize OS
-echo "$con Checking OS type"
-sleep 1
-if [[ $(uname -a) != *"kali"* ]]; then
-   echo "$con ERROR OS type: Not running on Kali, script is not build for this. Go run Kali!"
+if [[ $(uname -a) = *"Kali"* ]]; then
+   echo "$con ERROR OS type: Not running on Kali, script is not build for that! Go run Kali"
    exit 1
-else
-   echo "$con No problems found, continuing"
 fi
 
 #Functie om je internet facing interface te bepalen
