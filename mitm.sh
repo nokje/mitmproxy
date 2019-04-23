@@ -1,7 +1,26 @@
-#Kies internet uplink
-echo -n "Op welke interface zit de internet verbinding?[wlan0/eth0]:"
-read int
+
+#vars
+dt=$(date '+%d/%m/%Y %H:%M:%S');
+con=$dt' [mitm.sh] :'
+
+#Functie om je internet facing interface te bepalen
+inetint=$(route get 8.8.8.8 | awk '/interface/ {print $2}')
+
+#vraag de user om de internet facing interface in te vullen.
+echo -n "$con op welke interface zit de internet verbinding?[$inetint]:"
+read input
+if [[ -z "$input" ]]; then
+  #user input is empty
+  echo "$con using interface >$inetint< for internet facing interface"
+else
+  # If userInput is not empty show what the user typed in and run ls l
+  echo "$con using interface >$input< for internet facing interface"
+  ls -l
+fi
+
 echo "$int"
+exit 0
+
 #bouw de hostapd configuratie op
 echo -n "Vul het SSID in welke je wil hosten :"
 read ssid
@@ -19,5 +38,6 @@ sysctl -w net.ipv4.ip_forward=1 >/dev/null
 iptables -t nat -A PREROUTING -i $int -p tcp --dport 80 -j REDIRECT --to-port 8080
 iptables -t nat -A PREROUTING -i $int -p tcp --dport 443 -j REDIRECT --to-port 8080
 hostapd ./hostapd.conf
+
 #mitmproxy -m transparent
 #dnsmasq --conf-file=dnsmasq.conf 
